@@ -1,8 +1,11 @@
 const express = require('express');
+const fs = require('fs');
+const https = require('https');
 const database = require('./database.js');
 const booksRouter = require('./routes/bookRouter.js');
 const usersRouter = require('./routes/userRouter.js');
 const app = express();
+const PORT = process.env.PORT || 3443;
 
 //Convert json bodies to JavaScript object
 app.use(express.json());
@@ -13,8 +16,11 @@ async function main() {
 
     await database.connect();
 
-    app.listen(3000, () => {
-        console.log('Server listening on port 3000!');
+    https.createServer({
+        key: fs.readFileSync('./server.key'),
+        cert: fs.readFileSync('./server.cert'),
+    }, app).listen(PORT, () => {
+        console.log(`Server listening on ${PORT} !`);
     });
 
     process.on('SIGINT', () => {

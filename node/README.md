@@ -10,13 +10,19 @@ $ npm start
 ## API URL
 
 ```sh
-http://localhost:3000/api/v1/<resource>
+https://localhost:3443/api/v1/<resource>
 ```
 
 ## Uso de la API
 
 Se proporciona una colección Postman para interactuar con la API.
 
-La baseURL tiene que configurarse para localhost:3000
+La baseURL tiene que configurarse para https://localhost:3443
 
 La base de datos se inicializa con datos de ejemplo
+
+## Información token de acceso
+
+El token de acceso para poder acceder a las rutas privadas se puede conseguir llamando al endpoint **[POST]/users** (registrando un nuevo usuario), o si ya existe el usuario, llamando a **[POST]/users/token** junto con el nick y la password.
+
+Para acceder a las rutas privadas hay que añadir el token en el header **x-access-token** al hacer las peticiones REST.

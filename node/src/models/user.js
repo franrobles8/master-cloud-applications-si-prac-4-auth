@@ -19,7 +19,11 @@ const userSchema = new mongoose.Schema({
             message: props => `${props.value} is not a valid email`
         },
         required: [true, 'Email is mandatory']
-    }
+    },
+    password: {
+        type: String,
+        required: [true, 'Password is mandatory']
+    },
 });
 
 const User = mongoose.model('User', userSchema);
@@ -32,6 +36,7 @@ function toResponse(document) {
         let response = document.toObject({ versionKey: false });
         response.id = response._id.toString();
         delete response._id;
+        delete response.password;
         return response;
     }
 }
