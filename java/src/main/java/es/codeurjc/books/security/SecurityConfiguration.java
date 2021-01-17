@@ -3,6 +3,7 @@ package es.codeurjc.books.security;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -36,7 +37,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http
             .authorizeRequests()
             .antMatchers(HttpMethod.GET, "/api/v1/books/").permitAll()
-            .antMatchers(HttpMethod.POST, "/api/v1/users/").permitAll();
+            .antMatchers(HttpMethod.POST, "/api/v1/users/").permitAll()
+            .antMatchers(HttpMethod.POST, "/api/v1/auth").permitAll();
 
         // Private endpoints
         http
@@ -50,6 +52,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
     }
 
     @Override
