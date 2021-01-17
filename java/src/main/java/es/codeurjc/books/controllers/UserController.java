@@ -4,6 +4,7 @@ import java.util.Collection;
 
 import javax.validation.Valid;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -33,10 +34,12 @@ public class UserController {
 
     private UserService userService;
     private CommentService commentService;
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public UserController(UserService userService, CommentService commentService) {
+    public UserController(UserService userService, CommentService commentService, BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.userService = userService;
         this.commentService = commentService;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
     @Operation(summary = "Get all users")
@@ -78,6 +81,7 @@ public class UserController {
                     content = @Content)})
     @PostMapping("/")
     public UserResponseDto createUser(@Valid @RequestBody UserRequestDto userRequestDto) {
+        userRequestDto.setPassword(bCryptPasswordEncoder.encode(userRequestDto.getPassword()));
         return this.userService.save(userRequestDto);
     }
 

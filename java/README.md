@@ -1,4 +1,4 @@
-# Practice 2. Databases
+# Practice 4. Authentication and Authorization
 
 ## Usage
 
@@ -26,7 +26,7 @@ http://localhost:8080/api-docs.yaml
 http://localhost:8080/swagger-ui.html
 ```
 
-## Author
+## Used base code by:
 
 👤 **Álvaro Martín Martín**
 

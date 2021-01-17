@@ -31,6 +31,9 @@ public class User {
 	@Column(nullable = false)
 	private String email;
 
+	@Column(nullable = false)
+	private String password;
+
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
 	private Collection<Comment> comments = Collections.emptyList();
 
