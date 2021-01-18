@@ -115,4 +115,19 @@ public class BookController {
         return this.commentService.deleteComment(bookId, commentId);
     }
 
+    @Operation(summary = "Delete a book and its comments")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Deleted comment from the book",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = BookDetailsResponseDto.class))}),
+            @ApiResponse(responseCode = "400", description = "Invalid format id supplied",
+                    content = @Content),
+            @ApiResponse(responseCode = "404", description = "Book not found for provided id",
+                    content = @Content)})
+    @DeleteMapping("/{id}")
+    public BookDetailsResponseDto deleteBook(@Parameter(description = "identifier of the book")
+                                            @PathVariable long id) {
+        return this.bookService.deleteById(id);
+    }
+
 }

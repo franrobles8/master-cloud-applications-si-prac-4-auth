@@ -1,28 +1,47 @@
-# Práctica 2: Node y MongoDB
+# Practice 4. Authentication and Authorization with Node, MongoDB and JWT.
 
-## Ejecución
+## Usage
 
 ```sh
 $ docker run --name mongo-db  -p 27017:27017 -d mongo:latest
 $ npm install
 $ npm start
 ```
-## API URL
+## API Root URL
 
 ```sh
-https://localhost:3443/api/v1/<resource>
+http://localhost:3443/api/v1/<resource>
 ```
 
-## Uso de la API
+To use some of the routes, you may need to be authenticated in order to have the authorization. For this, you can create a new user and get a token with this two requests:
 
-Se proporciona una colección Postman para interactuar con la API.
+**Creates a new user:**
 
-La baseURL tiene que configurarse para https://localhost:3443
+```sh
+[POST]/api/v1/users/
+```
 
-La base de datos se inicializa con datos de ejemplo
+**Authenticate the user and returns the necessary token for authorization:**
 
-## Información token de acceso
+```sh
+[POST]/api/v1/auth
+```
+**Advices:**
 
-El token de acceso para poder acceder a las rutas privadas se puede conseguir llamando al endpoint **[POST]/users** (registrando un nuevo usuario), o si ya existe el usuario, llamando a **[POST]/users/token** junto con el nick y la password.
+- To use the token, you can paste it in a Rest Client like Postman, setting it as a **Bearer token** with the right value (To make it easier, you could set this token for all the collection and with that, you should have it for every request).
 
-Para acceder a las rutas privadas hay que añadir el token en el header **x-access-token** al hacer las peticiones REST.
+- This version of the API uses https, you should add a `server.cert` and `server.key` at the same level than the `package.json` file. They can be created with the following command:
+
+```sh
+openssl req -nodes -new -x509 -keyout server.key -out server.cert
+```
+
+## Postman Collection attached
+
+Contains a folder with a Postman Collection in order to use the API.
+
+## Authentication/Authorization made by:
+
+👤 Francisco Robles Castro
+
+* Github: [@franrobles8](https://github.com/franrobles8)

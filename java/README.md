@@ -1,4 +1,4 @@
-# Practice 4. Authentication and Authorization
+# Practice 4. Authentication and Authorization with Java, SpringBoot and MySQL
 
 ## Usage
 
@@ -10,26 +10,58 @@ mvn spring-boot:run
 ## API Root URL
 
 ```sh
-http://localhost:8080/api/v1/<resource>
+http://localhost:8443/api/v1/<resource>
+```
+
+To use some of the routes, you may need to be authenticated in order to have the authorization. For this, you can create a new user and get a token with this two requests:
+
+**Creates a new user:**
+
+```sh
+[POST]/api/v1/users/
+```
+
+**Authenticate the user and returns the necessary token for authorization:**
+
+```sh
+[POST]/api/v1/auth
+```
+
+**Advices:**
+
+- To use the token, you can paste it in a Rest Client like Postman, setting it as a **Bearer token** with the right value (To make it easier, you could set this token for all the collection and with that, you should have it for every request).
+
+- This version of the API uses https, you should add a `keystore.jks` under the `/resources` directory. It can be created with the following command:
+
+```sh
+cd C:\Program Files\Java\jdk-11.0.5\bin
+
+keytool -genkey -keyalg RSA -alias selfsigned -keystore keystore.jks -storepass password -validity 360 -keysize 2048
 ```
 
 ## API Docs URL
 
 ```sh
-http://localhost:8080/api-docs
-http://localhost:8080/api-docs.yaml
+https://localhost:8443/api-docs
+https://localhost:8443/api-docs.yaml
 ```
 
 ## API Swagger URL
 
 ```sh
-http://localhost:8080/swagger-ui.html
+http://localhost:8443/swagger-ui.html
 ```
 
-## Used base code by:
+## Initial code by:
 
-👤 **Álvaro Martín Martín**
+👤 Álvaro Martín Martín
 
 * Github: [@amartinm82](https://github.com/amartinm82)
 
-Note that you should have to [install JDK 11](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html), [Maven](https://maven.apache.org/install.html) and [Docker](https://docs.docker.com/engine/install/) as prerequisite.
+## Authentication/Authorization made by:
+
+👤 Francisco Robles Castro
+
+* Github: [@franrobles8](https://github.com/franrobles8)
+
+Note that you should have to [install JDK 14](https://www.oracle.com/es/java/technologies/javase/jdk14-archive-downloads.html), [Maven](https://maven.apache.org/install.html) and [Docker](https://docs.docker.com/engine/install/) as prerequisite.

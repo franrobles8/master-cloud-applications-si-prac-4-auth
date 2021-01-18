@@ -11,7 +11,7 @@
 	</parent>
 
 	<groupId>es.codeurjc.mca</groupId>
-	<artifactId>practica2.1.2-books_v2</artifactId>
+	<artifactId>practica4-books_auth</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 
 	<name>databases</name>
